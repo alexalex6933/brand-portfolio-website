@@ -1,0 +1,22 @@
+Features that make a good personal brand / outreach / pitch website:
+Home / Landing: Hero section, short intro
+
+About / Bio: Background, mission, values
+
+Contact: Email / social links / form
+
+Brands I've worked with section:
+
+
+Tech stack:
+Next.js (Frontend)
+Tailwind CSS (design)
+Vercel (hosting)
+
+The goal is to have a page where I display my personal metrics such as views
+over the last 30 days, my demographic of viewers, the demographic of my 
+followers, etc. Anythign that would help companies understand my audience 
+and see the benefit from partnering with me.
+
+I would prefer a minimal website that is plain, easily customisable, and 
+only has a landing page. It should have links to my socials.
