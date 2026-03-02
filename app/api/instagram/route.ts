@@ -60,14 +60,43 @@ export async function GET() {
     );
     const countryData = await countryRes.json();
 
+    // 5. Top media posts (sorted by views or engagement)
+    const mediaRes = await fetch(
+      `${IG_API}/${USER_ID}/media?fields=id,caption,media_type,thumbnail_url,media_url,permalink,like_count,comments_count,video_views,timestamp&limit=20&access_token=${TOKEN}`
+    );
+    const mediaData = await mediaRes.json();
+
+    type IgPost = {
+      id: string;
+      caption?: string;
+      media_type: string;
+      thumbnail_url?: string;
+      media_url?: string;
+      permalink: string;
+      like_count: number;
+      comments_count: number;
+      video_views?: number;
+      timestamp: string;
+    };
+
+    const allPosts: IgPost[] = mediaData?.data ?? [];
+    const sortedPosts = [...allPosts].sort((a, b) => {
+      const scoreA = (a.video_views ?? 0) || (a.like_count + a.comments_count);
+      const scoreB = (b.video_views ?? 0) || (b.like_count + b.comments_count);
+      return scoreB - scoreA;
+    });
+    const topPosts = sortedPosts.slice(0, 3);
+
     return NextResponse.json({
       followers: profile.followers_count ?? 0,
       media_count: profile.media_count ?? 0,
+      profile_picture_url: profile.profile_picture_url ?? null,
       profile_views_30d: insights.profile_views ?? 0,
       impressions_30d: insights.impressions ?? 0,
       reach_30d: insights.reach ?? 0,
       demographics: genderAgeData?.data?.[0]?.total_value?.breakdowns ?? [],
       countries: countryData?.data?.[0]?.total_value?.breakdowns ?? [],
+      top_posts: topPosts,
     });
   } catch {
     return NextResponse.json({ error: "Failed to fetch Instagram data" }, { status: 500 });

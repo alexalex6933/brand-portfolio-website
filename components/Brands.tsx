@@ -1,8 +1,8 @@
-// Replace the brand names and logo paths with your actual worked-with brands.
-// Place brand logos in /public/brands/ (SVG or PNG recommended, ~120x40px).
-// If you don't have logos yet, just the brand names will show as text.
+// CUSTOMIZE: Replace the brands array with your actual brand logos / names.
+// To use logos: set logo to a path inside /public/brands/ e.g. "/brands/nike.svg"
+// To show text only: leave logo undefined.
 
-const brands: { name: string; logo?: string }[] = [
+const BRANDS: { name: string; logo?: string }[] = [
   { name: "Brand One" },
   { name: "Brand Two" },
   { name: "Brand Three" },
@@ -13,33 +13,42 @@ const brands: { name: string; logo?: string }[] = [
 
 export default function Brands() {
   return (
-    <section id="brands" className="py-20 px-6 border-t border-[#E0DFDA]">
-      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
-        {/* Label */}
-        <div>
-          <span className="text-xs font-medium tracking-widest uppercase text-[#737373]">
-            Brands I've Worked With
+    <section id="brands" className="py-24 px-6 bg-[#F5F9FF]">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Header */}
+        <div className="mb-12">
+          <span className="text-xs font-bold tracking-widest uppercase text-[#3B82F6]">
+            Brands
           </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#06122B] leading-tight">
+            Trusted by leading brands.
+          </h2>
         </div>
 
-        {/* Brand grid */}
-        <div className="sm:col-span-2">
-          <div className="grid grid-cols-3 gap-4">
-            {brands.map((brand) => (
-              <div
-                key={brand.name}
-                className="h-14 bg-[#EEEEE9] rounded-lg flex items-center justify-center px-4"
-              >
-                {brand.logo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={brand.logo} alt={brand.name} className="max-h-7 max-w-full object-contain opacity-60" />
-                ) : (
-                  <span className="text-sm font-medium text-[#737373]">{brand.name}</span>
-                )}
-              </div>
-            ))}
-          </div>
+        {/* Logo grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
+          {BRANDS.map((b) => (
+            <div
+              key={b.name}
+              className="h-16 bg-white border border-[#DBEAFE] rounded-xl flex items-center justify-center px-4
+                         hover:border-[#3B82F6] hover:shadow-md hover:shadow-blue-100/50 hover:-translate-y-0.5
+                         transition-all duration-300 cursor-default"
+            >
+              {b.logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={b.logo}
+                  alt={b.name}
+                  className="max-h-7 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              ) : (
+                <span className="text-xs font-semibold text-[#5A6B8A]">{b.name}</span>
+              )}
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
