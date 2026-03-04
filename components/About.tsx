@@ -20,15 +20,13 @@ export default function About() {
             <div className="w-[3px] rounded-full bg-gradient-to-b from-[#1D4ED8] to-[#93C5FD] flex-shrink-0 self-stretch" />
             <div className="space-y-4">
               <p className="text-base text-[#06122B] leading-relaxed">
-                Hey, I&apos;m Alexander — a Sydney-based creator focused on modern relationships,
-                masculinity, and personal growth. I&apos;m also a Computer Science student, so I
-                naturally share content around studying, tech, productivity, and navigating
-                university life while building toward bigger goals.
+                Hey, I&apos;m Alexander — a Sydney-based creator covering relationships,
+                masculinity, and self-improvement. CS student, so I also post on tech,
+                productivity, and university life.
               </p>
               <p className="text-base text-[#5A6B8A] leading-relaxed">
-                My content speaks to young men who want to improve — in dating, discipline,
-                confidence, fitness, and career. I document the journey honestly, which builds
-                strong trust and engagement with my audience.
+                My audience is young men who want to level up. I document the journey
+                honestly — which drives real trust and engagement.
               </p>
               <div className="space-y-3 pt-1">
                 <p className="text-xs font-bold tracking-widest uppercase text-[#3B82F6]">I&apos;d love to work with</p>

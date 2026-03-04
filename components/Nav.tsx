@@ -30,7 +30,7 @@ export default function Nav() {
           {[
             { label: "About",   href: "#about" },
             { label: "Metrics", href: "#metrics" },
-            { label: "Work",    href: "#case-studies" },
+            { label: "Work",    href: "#ugc" },
           ].map((l) => (
             <a
               key={l.href}
