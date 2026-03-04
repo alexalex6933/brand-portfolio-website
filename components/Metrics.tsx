@@ -64,10 +64,25 @@ export default function Metrics() {
               Real numbers, real results.
             </h2>
           </div>
-          <p className="text-sm text-blue-300/70 sm:text-right max-w-xs">
-            Instagram Professional Dashboard · March 2026
-          </p>
         </div>
+
+        {/* ─── Instagram section ─── */}
+        <div className="space-y-8">
+
+          {/* Instagram header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="opacity-90">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="white" stroke="none" />
+              </svg>
+              <h3 className="text-xl font-extrabold text-white">Instagram</h3>
+            </div>
+            <p className="text-sm text-blue-300/70 sm:text-right">
+              Instagram Professional Dashboard · March 2026
+            </p>
+          </div>
 
         {/* Key stat cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -148,6 +163,8 @@ export default function Metrics() {
             })}
           </div>
         </div>
+
+        </div>{/* end Instagram section */}
 
         {/* ─── TikTok section ─── */}
         <div className="pt-8 border-t border-white/10 space-y-8">
