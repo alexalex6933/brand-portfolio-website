@@ -131,7 +131,7 @@ export default function Hero() {
             <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-blue-100 to-blue-200 border border-[#BFDBFE] shadow-2xl shadow-blue-200/50">
               {!imgError && (
                 <Image
-                  src="/profile.jpg"
+                  src="/profile.JPG"
                   alt="Alexander Leung"
                   fill
                   className="object-cover object-top"
