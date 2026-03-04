@@ -15,9 +15,8 @@ export default function CTASection() {
 
         {/* CTA buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4">
-          {/* CUSTOMIZE: replace with your actual email */}
           <a
-            href="mailto:you@email.com"
+            href="mailto:alexleuung1@gmail.com"
             className="inline-flex items-center gap-2 bg-white text-[#1D4ED8] text-sm font-bold
                        px-7 py-4 rounded-full hover:bg-blue-50 active:scale-95
                        transition-all duration-200 shadow-lg shadow-blue-900/30"
@@ -35,6 +34,14 @@ export default function CTASection() {
             View audience data
           </a>
         </div>
+
+        {/* Email display */}
+        <p className="text-sm text-blue-200/80">
+          or email directly:{" "}
+          <a href="mailto:alexleuung1@gmail.com" className="text-white font-semibold hover:underline">
+            alexleuung1@gmail.com
+          </a>
+        </p>
 
         {/* Trust note */}
         <p className="text-xs text-blue-300/60">

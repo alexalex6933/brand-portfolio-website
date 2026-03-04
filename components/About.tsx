@@ -30,16 +30,16 @@ export default function About() {
                 confidence, fitness, and career. I document the journey honestly, which builds
                 strong trust and engagement with my audience.
               </p>
-              <p className="text-base text-[#5A6B8A] leading-relaxed">
-                Beyond relationships and self-development, my hobbies and interests include
-                running, lifting, coding, technology, and vlogging — making me a strong fit for
-                collaborations across fitness, tech, education, productivity tools, lifestyle,
-                and performance brands.
-              </p>
-              <p className="text-base text-[#5A6B8A] leading-relaxed">
-                I partner with brands that align with growth and ambition, creating native,
-                story-driven content that feels real and drives action — not just impressions.
-              </p>
+              <div className="space-y-3 pt-1">
+                <p className="text-xs font-bold tracking-widest uppercase text-[#3B82F6]">I&apos;d love to work with</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Fitness", "Tech", "Productivity", "Education", "Lifestyle", "Performance", "Men's Health", "Finance"].map((tag) => (
+                    <span key={tag} className="text-xs font-medium text-[#1D4ED8] bg-[#EFF6FF] border border-[#BFDBFE] px-3 py-1 rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 

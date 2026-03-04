@@ -28,11 +28,11 @@ export default function Contact() {
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
 
         {/* Name + email */}
-        <div className="space-y-1 text-center sm:text-left">
+        <div className="space-y-1.5 text-center sm:text-left">
           <p className="text-sm font-semibold text-white">Alexander Leung</p>
           <a
             href="mailto:alexleuung1@gmail.com"
-            className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+            className="text-base font-bold text-blue-400 hover:text-blue-300 transition-colors tracking-tight"
           >
             alexleuung1@gmail.com
           </a>
