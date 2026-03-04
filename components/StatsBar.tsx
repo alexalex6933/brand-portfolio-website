@@ -4,23 +4,23 @@ import { useCounter } from "@/hooks/useCounter";
 
 const STATS = [
   {
-    target: 14946,
+    target: 57179,
     fmt: (n: number) => `${(n / 1000).toFixed(1)}K`,
-    label: "Instagram Followers",
+    label: "Total Followers",
   },
   {
-    target: 6249289,
+    target: 11661544,
     fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+`,
     label: "Monthly Views",
   },
   {
-    target: 3885283,
+    target: 9248370,
     fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+`,
     label: "Monthly Reach",
   },
   {
-    target: 840633,
-    fmt: (n: number) => `${Math.round(n / 1000)}K+`,
+    target: 1572585,
+    fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+`,
     label: "Monthly Interactions",
   },
 ];

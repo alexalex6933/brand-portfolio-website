@@ -50,7 +50,7 @@ export default function Hero() {
           >
             <span className="w-1.5 h-1.5 bg-[#3B82F6] rounded-full animate-pulse" />
             {/* CUSTOMIZE: update status */}
-            Available for brand partnerships · 2025
+            Available for brand partnerships · 2026
           </div>
 
           {/* Headline */}
@@ -71,7 +71,7 @@ export default function Hero() {
           >
             {/* CUSTOMIZE: update with your niche and combined follower count */}
             Content creator &amp; brand strategist with a combined audience across
-            Instagram, TikTok, and YouTube. Authentic content that converts.
+            Instagram and TikTok. Authentic content that converts.
           </p>
 
           {/* CTAs */}
@@ -101,11 +101,9 @@ export default function Hero() {
             className="animate-fade-in-up flex flex-wrap items-center gap-2"
             style={{ animationDelay: "340ms" }}
           >
-            {/* CUSTOMIZE: replace "000K" with your actual follower counts */}
             {[
-              { icon: <InstagramIcon />, label: "Instagram", count: "000K" },
-              { icon: <TikTokIcon />,   label: "TikTok",    count: "000K" },
-              { icon: <YouTubeIcon />,  label: "YouTube",   count: "000K" },
+              { icon: <InstagramIcon />, label: "Instagram", count: "14.9K" },
+              { icon: <TikTokIcon />,   label: "TikTok",    count: "42.2K" },
             ].map((p) => (
               <div
                 key={p.label}
@@ -150,15 +148,13 @@ export default function Hero() {
 
             {/* Floating chip — engagement rate (top-right) */}
             <div className="float-a absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl border border-[#DBEAFE] px-4 py-3 min-w-[116px]">
-              {/* CUSTOMIZE: update with your actual engagement rate */}
-              <p className="text-2xl font-extrabold text-[#06122B]">4.8%</p>
+              <p className="text-2xl font-extrabold text-[#06122B]">17%</p>
               <p className="text-xs text-[#5A6B8A] mt-0.5">Avg. Engagement</p>
             </div>
 
             {/* Floating chip — monthly reach (bottom-left) */}
             <div className="float-b absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl border border-[#DBEAFE] px-4 py-3 min-w-[116px]">
-              {/* CUSTOMIZE: update with your actual monthly reach */}
-              <p className="text-2xl font-extrabold text-[#06122B]">500K+</p>
+              <p className="text-2xl font-extrabold text-[#06122B]">9.3M+</p>
               <p className="text-xs text-[#5A6B8A] mt-0.5">Monthly Reach</p>
             </div>
           </div>

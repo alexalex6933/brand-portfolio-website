@@ -149,6 +149,69 @@ export default function Metrics() {
           </div>
         </div>
 
+        {/* ─── TikTok section ─── */}
+        <div className="pt-8 border-t border-white/10 space-y-8">
+
+          {/* TikTok header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {/* TikTok icon */}
+              <svg width="20" height="22" viewBox="0 0 24 24" fill="white" className="opacity-90">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z" />
+              </svg>
+              <h3 className="text-xl font-extrabold text-white">TikTok</h3>
+            </div>
+            <p className="text-sm text-blue-300/70 sm:text-right">
+              TikTok Analytics · Feb 2026 (28 days)
+            </p>
+          </div>
+
+          {/* TikTok key stat cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {[
+              { v: "42.2K", l: "Total Followers" },
+              { v: "5.4M",  l: "Video Views (28d)" },
+              { v: "5.4M",  l: "Reached Audience (28d)" },
+              { v: "630K",  l: "Likes (28d)" },
+              { v: "99.5K", l: "Shares (28d)" },
+              { v: "+10.1K", l: "New Followers (28d)" },
+            ].map((s) => (
+              <div key={s.l} className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-1.5 hover:bg-white/8 transition-colors">
+                <p className="text-2xl font-extrabold text-white">{s.v}</p>
+                <p className="text-xs text-blue-300/70">{s.l}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* TikTok audience breakdown */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+              <p className="text-sm font-bold text-white">Audience Gender Split</p>
+              <div className="space-y-2">
+                <p className="text-[11px] text-blue-300/60 uppercase tracking-widest font-semibold">New Followers (Feb 22–28)</p>
+                <SplitBar
+                  a={72.3} b={27.7}
+                  labelA="Male" labelB="Female"
+                  colorA="#1D4ED8" colorB="#93C5FD"
+                />
+              </div>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+              <p className="text-sm font-bold text-white">Engagement (28d)</p>
+              <div className="space-y-3">
+                <BarRow label="Likes"    pct={85.3} color="#1D4ED8" />
+                <BarRow label="Shares"   pct={13.5} color="#3B82F6" />
+                <BarRow label="Comments" pct={1.2}  color="#93C5FD" />
+              </div>
+              <p className="text-xs text-blue-300/50 leading-relaxed pt-1">
+                630K likes · 99.5K shares · 2.2K comments
+              </p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

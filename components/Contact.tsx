@@ -44,7 +44,6 @@ export default function Contact() {
           {[
             { href: "https://instagram.com/alexleuung", icon: <IGIcon />, label: "Instagram" },
             { href: "https://tiktok.com/@alexleuung",  icon: <TTIcon />, label: "TikTok" },
-            { href: "https://youtube.com/@alexleuung", icon: <YTIcon />, label: "YouTube" },
           ].map((s) => (
             <a
               key={s.label}
