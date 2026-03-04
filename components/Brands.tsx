@@ -1,14 +1,16 @@
-// CUSTOMIZE: Replace the brands array with your actual brand logos / names.
-// To use logos: set logo to a path inside /public/brands/ e.g. "/brands/nike.svg"
-// To show text only: leave logo undefined.
-
-const BRANDS: { name: string; logo?: string }[] = [
-  { name: "Brand One" },
-  { name: "Brand Two" },
-  { name: "Brand Three" },
-  { name: "Brand Four" },
-  { name: "Brand Five" },
-  { name: "Brand Six" },
+const BRANDS: { name: string; desc: string; url: string; logo?: string }[] = [
+  {
+    name: "Terra",
+    desc: "Date Night Kits",
+    url: "https://itsterra.com.au",
+    logo: "/brands/terra-logo.gif",
+  },
+  {
+    name: "Momentum",
+    desc: "Health & Nutrition",
+    url: "https://themomentum.com.au",
+    logo: "/brands/momentum-logo.png",
+  },
 ];
 
 export default function Brands() {
@@ -22,30 +24,35 @@ export default function Brands() {
             Brands
           </span>
           <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#06122B] leading-tight">
-            Trusted by leading brands.
+            Brands I&apos;ve collaborated with.
           </h2>
         </div>
 
-        {/* Logo grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
+        {/* Brand cards */}
+        <div className="flex flex-wrap gap-4">
           {BRANDS.map((b) => (
-            <div
+            <a
               key={b.name}
-              className="h-16 bg-white border border-[#DBEAFE] rounded-xl flex items-center justify-center px-4
+              href={b.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center gap-2 h-24 w-44
+                         bg-white border border-[#DBEAFE] rounded-xl px-5
                          hover:border-[#3B82F6] hover:shadow-md hover:shadow-blue-100/50 hover:-translate-y-0.5
-                         transition-all duration-300 cursor-default"
+                         transition-all duration-300"
             >
               {b.logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={b.logo}
                   alt={b.name}
-                  className="max-h-7 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  className="max-h-8 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                 />
               ) : (
-                <span className="text-xs font-semibold text-[#5A6B8A]">{b.name}</span>
+                <span className="text-base font-bold text-[#06122B] group-hover:text-[#1D4ED8] transition-colors">{b.name}</span>
               )}
-            </div>
+              <span className="text-[11px] text-[#5A6B8A]">{b.desc}</span>
+            </a>
           ))}
         </div>
 

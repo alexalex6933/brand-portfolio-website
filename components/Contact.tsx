@@ -30,12 +30,11 @@ export default function Contact() {
         {/* Name + email */}
         <div className="space-y-1 text-center sm:text-left">
           <p className="text-sm font-semibold text-white">Alexander Leung</p>
-          {/* CUSTOMIZE: replace with your email */}
           <a
-            href="mailto:you@email.com"
+            href="mailto:alexleuung1@gmail.com"
             className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
           >
-            you@email.com
+            alexleuung1@gmail.com
           </a>
         </div>
 
