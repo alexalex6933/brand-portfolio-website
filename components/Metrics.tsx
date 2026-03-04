@@ -1,104 +1,156 @@
-"use client";
+/* ─── Static Instagram metrics — last updated March 2026 ─── */
 
-import { useEffect, useState } from "react";
-
-/* ─── Types ─────────────────────────────────────── */
-interface IGData {
-  followers: number;
-  media_count: number;
-  profile_views_30d: number;
-  impressions_30d: number;
-  reach_30d: number;
-  demographics: Breakdown[];
-  countries: Breakdown[];
-}
-interface Breakdown {
-  dimension_keys: string[];
-  results: { dimension_values: string[]; value: number }[];
-}
-
-/* ─── Helpers ───────────────────────────────────── */
-function fmt(n: number) {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
-  return n.toString();
-}
-
-const BLUE_SHADES = ["#1D4ED8", "#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"];
-
-/* ─── Platform icons ─────────────────────────────── */
-function IGIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-function TTIcon() {
-  return (
-    <svg width="15" height="17" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z" />
-    </svg>
-  );
-}
-function YTIcon() {
-  return (
-    <svg width="20" height="15" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 00.5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 002.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 002.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z" />
-    </svg>
-  );
-}
-
-/* ─── Bar chart row ──────────────────────────────── */
 function BarRow({ label, pct, color }: { label: string; pct: number; color: string }) {
   return (
     <div className="flex items-center gap-3">
       <span className="w-16 text-xs text-blue-200 flex-shrink-0 font-medium">{label}</span>
       <div className="flex-1 bg-white/10 rounded-full h-1.5">
-        <div className="h-1.5 rounded-full transition-all duration-700" style={{ width: `${pct}%`, background: color }} />
+        <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, background: color }} />
       </div>
       <span className="w-9 text-right text-xs text-blue-200">{pct.toFixed(0)}%</span>
     </div>
   );
 }
 
+function SplitBar({ a, b, labelA, labelB, colorA, colorB }: {
+  a: number; b: number; labelA: string; labelB: string; colorA: string; colorB: string;
+}) {
+  const total = a + b;
+  return (
+    <div className="space-y-2">
+      <div className="flex rounded-full overflow-hidden h-2">
+        <div style={{ width: `${(a / total) * 100}%`, background: colorA }} />
+        <div style={{ width: `${(b / total) * 100}%`, background: colorB }} />
+      </div>
+      <div className="flex justify-between text-[11px] text-blue-200">
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full inline-block" style={{ background: colorA }} />
+          {labelA} · {a.toFixed(1)}%
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full inline-block" style={{ background: colorB }} />
+          {labelB} · {b.toFixed(1)}%
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Data ───────────────────────────────────────── */
+const ACTIVE_HOURS = [
+  { label: "12a", followers: 5462 },
+  { label: "3a",  followers: 6082 },
+  { label: "6a",  followers: 6164 },
+  { label: "9a",  followers: 5724 },
+  { label: "12p", followers: 5460 },
+  { label: "3p",  followers: 5242 },
+  { label: "6p",  followers: 5504 },
+  { label: "9p",  followers: 5320 },
+];
+const MAX_ACTIVE = Math.max(...ACTIVE_HOURS.map((h) => h.followers));
+
 export default function Metrics() {
-  const [data, setData] = useState<IGData | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  return (
+    <section id="metrics" className="py-24 px-6 bg-[#06122B]">
+      <div className="max-w-5xl mx-auto space-y-14">
 
-  useEffect(() => {
-    fetch("/api/instagram")
-      .then((r) => r.json())
-      .then((d) => { if (d.error) setError(d.error); else setData(d); })
-      .catch(() => setError("Failed to load metrics"))
-      .finally(() => setLoading(false));
-  }, []);
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <span className="text-xs font-bold tracking-widest uppercase text-[#3B82F6]">
+              Audience Metrics
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              Real numbers, real results.
+            </h2>
+          </div>
+          <p className="text-sm text-blue-300/70 sm:text-right max-w-xs">
+            Instagram Professional Dashboard · March 2026
+          </p>
+        </div>
 
-  /* Derived demographics */
-  const genderMap: Record<string, number> = {};
-  if (data?.demographics?.[0]?.results) {
-    for (const r of data.demographics[0].results) {
-      const g = r.dimension_values[1] ?? r.dimension_values[0] ?? "Other";
-      genderMap[g] = (genderMap[g] ?? 0) + r.value;
-    }
-  }
-  const totalGender = Object.values(genderMap).reduce((a, b) => a + b, 0);
+        {/* Key stat cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {[
+            { v: "14.9K",  l: "Instagram Followers" },
+            { v: "6.2M",   l: "Views (30d)" },
+            { v: "3.9M",   l: "Accounts Reached (30d)" },
+            { v: "840K",   l: "Interactions (30d)" },
+            { v: "566K",   l: "Accounts Engaged (30d)" },
+            { v: "69.4K",  l: "Profile Visits (30d)" },
+          ].map((s) => (
+            <div key={s.l} className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-1.5 hover:bg-white/8 transition-colors">
+              <p className="text-2xl font-extrabold text-white">{s.v}</p>
+              <p className="text-xs text-blue-300/70">{s.l}</p>
+            </div>
+          ))}
+        </div>
 
-  const ageMap: Record<string, number> = {};
-  if (data?.demographics?.[0]?.results) {
-    for (const r of data.demographics[0].results) {
-      const age = r.dimension_values[0];
-      ageMap[age] = (ageMap[age] ?? 0) + r.value;
-    }
-  }
-  const topAges = Object.entries(ageMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  const totalAge = topAges.reduce((a, b) => a + b[1], 0);
+        {/* Audience breakdown + Content type */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-  const topCountries = (data?.countries?.[0]?.results ?? []).sort((a, b) => b.value - a.value).slice(0, 5);
-  const totalCountry = topCountries.reduce((a, b) => a + b.value, 0);
+          {/* Audience — who sees the content */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+            <p className="text-sm font-bold text-white">Audience Breakdown</p>
+
+            <div className="space-y-2">
+              <p className="text-[11px] text-blue-300/60 uppercase tracking-widest font-semibold">Views</p>
+              <SplitBar
+                a={96.4} b={3.6}
+                labelA="Non-followers" labelB="Followers"
+                colorA="#1D4ED8" colorB="#93C5FD"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-[11px] text-blue-300/60 uppercase tracking-widest font-semibold">Interactions</p>
+              <SplitBar
+                a={82.5} b={17.5}
+                labelA="Non-followers" labelB="Followers"
+                colorA="#1D4ED8" colorB="#93C5FD"
+              />
+            </div>
+          </div>
+
+          {/* Content type split */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+            <p className="text-sm font-bold text-white">Content Type (Views)</p>
+            <div className="space-y-3">
+              <BarRow label="Reels"   pct={97.8} color="#1D4ED8" />
+              <BarRow label="Stories" pct={2.2}  color="#93C5FD" />
+            </div>
+            <p className="text-xs text-blue-300/50 leading-relaxed pt-2">
+              97.8% of all views come from Reels — ideal for brand integrations with maximum organic reach.
+            </p>
+          </div>
+
+        </div>
+
+        {/* Most active hours */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+          <p className="text-sm font-bold text-white">Followers — Most Active Times</p>
+          <div className="flex items-end gap-2 h-24">
+            {ACTIVE_HOURS.map((h) => {
+              const heightPct = (h.followers / MAX_ACTIVE) * 100;
+              return (
+                <div key={h.label} className="flex flex-col items-center gap-1.5 flex-1">
+                  <div className="w-full rounded-t-sm" style={{
+                    height: `${heightPct}%`,
+                    background: heightPct > 90 ? "#1D4ED8" : "#3B82F6",
+                    minHeight: "4px",
+                  }} />
+                  <span className="text-[10px] text-blue-300/60">{h.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 
   return (
     <section id="metrics" className="py-24 px-6 bg-[#06122B]">

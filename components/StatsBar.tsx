@@ -2,28 +2,26 @@
 
 import { useCounter } from "@/hooks/useCounter";
 
-// CUSTOMIZE: replace these with your real stats
 const STATS = [
   {
-    target: 1200000,
-    fmt: (n: number) => n >= 1e6 ? `${(n / 1e6).toFixed(1)}M+` : `${Math.round(n / 1000)}K+`,
-    label: "Combined Followers",
+    target: 14946,
+    fmt: (n: number) => `${(n / 1000).toFixed(1)}K`,
+    label: "Instagram Followers",
   },
   {
-    target: 500000,
-    fmt: (n: number) => n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : `${Math.round(n / 1000)}K+`,
+    target: 6249289,
+    fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+`,
+    label: "Monthly Views",
+  },
+  {
+    target: 3885283,
+    fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+`,
     label: "Monthly Reach",
   },
   {
-    // ×10 so the counter can animate integers; displayed as X.X%
-    target: 48,
-    fmt: (n: number) => `${(n / 10).toFixed(1)}%`,
-    label: "Avg. Engagement Rate",
-  },
-  {
-    target: 50,
-    fmt: (n: number) => `${n}+`,
-    label: "Brand Collaborations",
+    target: 840633,
+    fmt: (n: number) => `${Math.round(n / 1000)}K+`,
+    label: "Monthly Interactions",
   },
 ];
 
